@@ -1,0 +1,61 @@
+/* src/components/Header.module.css */
+
+.header {
+  background-color: #20232a;
+  padding: 20px 40px; /* Added more horizontal padding */
+  text-align: center;
+  font-size: 1.5rem;
+  color: #61dafb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titleLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* This is the container for our login/logout items */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Increased the space between items */
+  font-size: 1rem; /* Adjusted font size for nav items */
+}
+
+/* This styles the "Log In" and "Sign Up" links */
+.nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.nav a:hover {
+  color: #61dafb;
+}
+
+/* This styles the welcome message "Welcome, user@example.com" */
+.nav span {
+  color: #ccc;
+  font-size: 0.9rem; /* Make the email slightly smaller */
+}
+
+/* THIS IS THE STYLE FOR THE SIGN OUT BUTTON */
+.button {
+  background: none;
+  border: 1px solid #61dafb;
+  color: #61dafb;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.button:hover {
+  background-color: #61dafb;
+  color: #20232a;
+}

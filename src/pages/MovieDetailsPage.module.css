@@ -1,0 +1,44 @@
+/* src/pages/MovieDetailsPage.module.css */
+.detailsContainer {
+  display: flex;
+  padding: 40px;
+  gap: 40px;
+}
+
+.poster {
+  max-width: 300px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.detailsText {
+  flex: 1;
+}
+
+.tagline {
+  font-style: italic;
+  color: #ccc;
+}
+
+.feedback {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.rem;
+}
+
+.watchlistButton {
+  background-color: #61dafb;
+  color: #20232a;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.2s;
+}
+
+.watchlistButton:hover {
+  background-color: #88eaff;
+}

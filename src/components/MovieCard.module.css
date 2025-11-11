@@ -1,0 +1,47 @@
+.movieCard {
+  background-color: #444;
+  border: 1px solid #555;
+  border-radius: 8px;
+  padding: 1px;
+  text-align: center;
+  transition: 0.2s ease-in;
+}
+
+.movieCard:hover {
+  transform: scale(1.02);
+  box-shadow: 2px 2px 5px rgb(250, 176, 176);
+}
+
+.movieCard img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.movieCard h3 {
+  margin-top: 0;
+  color: #61dafb;
+}
+
+.movieCard p {
+  font-weight: bold;
+}
+
+.link { 
+  text-decoration: none; color: inherit;
+}
+
+.removeButton {
+  background-color: #ff6b6b; /* A reddish color for delete actions */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  transition: background-color 0.2s;
+}
+
+.removeButton:hover {
+  background-color: #e55a5a;
+}
