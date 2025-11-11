@@ -48,7 +48,7 @@ const MovieDetailsPage = () => {
 
     fetchMovieDetails();
 
-  }, [movieId]);
+  }, [movieId, API_KEY, BASE_URL]);
 
   const handleAddToWatchlist = async () => {
     if(!currentUser){

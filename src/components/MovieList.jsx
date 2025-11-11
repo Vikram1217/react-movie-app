@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useCallback } from "react";
 import MovieCard from "./MovieCard";
 import styles from './MovieList.module.css';
 import useApi from "../hooks/useApi"; // 1. Import our custom hook

@@ -1,12 +1,11 @@
 // src/App.jsx
-import React, {useState} from 'react';
+import React from 'react';
 import Header from './components/Header.jsx';
 import HomePage from './pages/HomePage.jsx';
 import { Routes, Route } from 'react-router-dom';
 import MovieDetailsPage from './pages/MovieDetailsPage.jsx';
 import SignUpPage from './pages/SignUpPage.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
-import styles from './App.module.css'
 import { LoginPage } from './pages/LoginPage.jsx';
 import WatchListPage from './pages/WatchListPage.jsx';
 

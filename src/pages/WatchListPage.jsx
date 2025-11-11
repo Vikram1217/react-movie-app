@@ -1,9 +1,8 @@
 import React from 'react';
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebase';
-import MovieList from '../components/MovieList';
 import MovieCard from '../components/MovieCard';
 import styles from './WatchListPage.module.css'; // We'll create this
 
@@ -12,31 +11,8 @@ const WatchListPage = () => {
 
   const {currentUser} = useAuth();
   const [watchlist, setWatchlist] = useState([]);
-  const [someOtherState, setSomeOtherState] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-
-  /// 1. Wrap the expensive calculation in useMemo
-  const favoriteGenre = useMemo(() => {
-    console.log("Calculating favorite genre..."); // To prove it's working
-
-    if (watchlist.length === 0) {
-      return 'N/A';
-    }
-
-    // This is our "expensive" logic
-    const genres = watchlist.flatMap(movie => movie.genres || []); // Assuming movie object has a genres array
-    if (genres.length === 0) return 'N/A';
-    
-    const genreCounts = genres.reduce((acc, genre) => {
-      acc[genre] = (acc[genre] || 0) + 1;
-      return acc;
-    }, {});
-
-    return Object.keys(genreCounts).reduce((a, b) => 
-      genreCounts[a] > genreCounts[b] ? a : b
-    );
-  }, [watchlist]); // 2. The dependency array
 
 
   useEffect(() => {
@@ -113,10 +89,6 @@ const WatchListPage = () => {
   return (
   <div className={styles.watchlistContainer}>
       <h2>My Watchlist</h2>
-      <div className={styles.stats}>
-        <p>Total Movies: {watchlist.length}</p>
-        <p>Your Favorite Genre: {favoriteGenre}</p> {/* 3. Use the memoized value */}
-      </div>
       {watchlist.length > 0 ? (
         <div className={styles.moviesGrid}>
           {watchlist.map(movie => (
