@@ -35,7 +35,7 @@ const WatchListPage = () => {
         // Map over the results and extract the data
         const movies = querySnapShot.docs.map((doc) => ({
           ...doc.data(), // Spread the document data (id, title, etc.)
-          id: doc.id, // the document ID is hte movie ID
+          id: doc.id, // the document ID is the movie ID
         }));
 
         setWatchlist(movies);

@@ -26,7 +26,7 @@
   font-size: 1.rem;
 }
 
-.watchlistButton {
+.addButton {
   background-color: #61dafb;
   color: #20232a;
   border: none;
@@ -39,6 +39,40 @@
   transition: background-color 0.2s;
 }
 
-.watchlistButton:hover {
+.addButton:hover {
+  background-color: #88eaff;
+}
+
+.removeButton {
+  background-color: #f4452e;
+  color: #20232a;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.2s;
+}
+
+.removeButton:hover {
+  background-color: #f06444;
+}
+
+.backButton {
+  background-color: #61dafb;
+  color: #20232a;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.2s;
+}
+
+.backButton:hover {
   background-color: #88eaff;
 }
