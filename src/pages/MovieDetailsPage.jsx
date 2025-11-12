@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom';
 import styles from './MovieDetailsPage.module.css';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -17,11 +17,11 @@ const MovieDetailsPage = () => {
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [alreadyInWatchList, setAlreadyInWatchList] = useState(false);
 
   const { currentUser } = useAuth();
 
-  useEffect(() => {
-    
+  useEffect(() => {    
     setIsLoading(false);
     setError(null);
 
@@ -44,11 +44,41 @@ const MovieDetailsPage = () => {
       }finally{
         setIsLoading(false)
       }
-    }
-
+    };
     fetchMovieDetails();
-
   }, [movieId, API_KEY, BASE_URL]);
+
+  useEffect(() => {
+
+     const checkWatchList = async () => {
+      if(!currentUser){
+        return;
+      }
+
+      const movieDocRef = doc(db, 'watchlists', currentUser.uid, 'movies', String(movieId));
+
+      try {
+        const docSnap = await getDoc(movieDocRef);
+        setAlreadyInWatchList(docSnap.exists());
+      } catch (err) {
+        console.log('Error fetching data: ', err)
+      }
+    };
+    checkWatchList();
+  }, [currentUser, movieId]);
+
+  const handleRemoveFromWatchlist = async () => {
+
+    const deleteDocRef = doc(db, "watchlists", currentUser.uid, "movies", String(movieId));
+    try {
+      await deleteDoc(deleteDocRef);
+      alert(movie.title + ' has beed removed from watch list')
+      navigate('/');
+    } catch (err) {
+      console.log('Unable to delete document: ', err);
+    }
+  }
+
 
   const handleAddToWatchlist = async () => {
     if(!currentUser){
@@ -87,6 +117,7 @@ const MovieDetailsPage = () => {
   if (!movie) return null; // Or some other placeholder if movie is null
 
   const posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+  console.log(`Does the movie already exist in the watchList: ${alreadyInWatchList}`);
   
   return (
     <div className={styles.detailsContainer}>
@@ -95,12 +126,21 @@ const MovieDetailsPage = () => {
         <h1>{movie.title}</h1>
         <p className={styles.tagline}>{movie.tagline}</p>
         {currentUser && (
-          <button 
-            onClick={handleAddToWatchlist} 
-            className={styles.watchlistButton}
-          >
-            Add to Watchlist
-          </button>
+          alreadyInWatchList ? (
+            <button 
+              onClick={handleRemoveFromWatchlist} 
+              className={styles.removeButton}
+            >
+              Remove from Watchlist
+            </button>
+          ) : (
+            <button 
+              onClick={handleAddToWatchlist} 
+              className={styles.addButton}
+            >
+              Add to Watchlist
+            </button>
+          )
         )}
         <h2>Overview</h2>
         <p>{movie.overview}</p>
@@ -108,7 +148,7 @@ const MovieDetailsPage = () => {
         <p><strong>Rating:</strong> {movie.vote_average.toFixed(1)} / 10</p>
          <button 
             onClick={() => navigate('/')} 
-            className={styles.watchlistButton}
+            className={styles.backButton}
           >
             Back
           </button>        
